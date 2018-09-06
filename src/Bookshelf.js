@@ -4,11 +4,11 @@ class Bookshelf extends Component {
   render() {
     const { books } = this.props;
     const shelves = [
-      {name: 'Current',
+      {name: 'currentlyReading',
        text: 'Currently Reading'},
-      {name: 'Want',
+      {name: 'wantToRead',
        text: 'Want to Read'},
-      {name: 'Read',
+      {name: 'read',
        text: 'Read'},
     ];
 
@@ -28,7 +28,7 @@ class Bookshelf extends Component {
                   <li key={book.title}>
                   <div className="book">
                     <div className="book-top">
-                      <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: "url("+ book.image +")" }}></div>
+                      <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: "url("+ book.imageLinks.thumbnail +")" }}></div>
                       <div className="book-shelf-changer">
                         <select value={book.shelf} onChange=''>
                           <option value="move" disabled>Move to...</option>
@@ -40,7 +40,7 @@ class Bookshelf extends Component {
                       </div>
                     </div>
                     <div className="book-title">{ book.title }</div>
-                    <div className="book-authors">{ book.author }</div>
+                    <div className="book-authors">{ book.authors }</div>
                   </div>
                 </li>)
   )}
