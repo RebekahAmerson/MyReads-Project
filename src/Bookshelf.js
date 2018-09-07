@@ -10,6 +10,13 @@ class Bookshelf extends Component {
     books: []
   }
 
+  updateBooks = (shelf, book) => {
+    BooksAPI.update(book, shelf).then(
+      (books) =>
+      this.setState({ books })
+    )
+  }
+
   componentDidMount() {
     BooksAPI.getAll().then((books) => this.setState({books}))
   }
@@ -37,7 +44,7 @@ class Bookshelf extends Component {
             <h2 className="bookshelf-title">{shelf.text}</h2>
             <div className="bookshelf-books">
               <ol className="books-grid">
-              <Book books={books.filter((book) => book.shelf === shelf.name)} />
+              <Book books={books.filter((book) => book.shelf === shelf.name)} onShelfChange={this.updateBooks}/>
               </ol>
             </div>
           </div>
@@ -45,9 +52,7 @@ class Bookshelf extends Component {
         </div>
       </div>
       <div className="open-search">
-        <Link to='/search'>
-          <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
-        </Link>
+        <Link to='/search'>Add a book</Link>
       </div>
     </div>
   )
