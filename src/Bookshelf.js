@@ -11,10 +11,9 @@ class Bookshelf extends Component {
   }
 
   updateBooks = (shelf, book) => {
-    BooksAPI.update(book, shelf).then(
-      (books) =>
-      this.setState({ books })
-    )
+    console.log(`moved to ${shelf}`);
+    BooksAPI.update(book, shelf).then(BooksAPI.getAll().then((books) => this.setState({books})))
+    console.log(this.state.book);
   }
 
   componentDidMount() {
