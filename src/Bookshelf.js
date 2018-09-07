@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Book from './Book';
-import * as BooksAPI from './BooksAPI'
+import * as BooksAPI from './BooksAPI';
+import { Link } from 'react-router-dom';
+
 
 
 class Bookshelf extends Component {
@@ -43,7 +45,9 @@ class Bookshelf extends Component {
         </div>
       </div>
       <div className="open-search">
-        <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
+        <Link to='/search'>
+          <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
+        </Link>
       </div>
     </div>
   )

@@ -2,6 +2,7 @@ import React from 'react'
 import './App.css'
 import Bookshelf from './Bookshelf';
 import SearchPage from './SearchPage';
+import { Route } from 'react-router-dom';
 
 class BooksApp extends React.Component {
   state = {
@@ -17,11 +18,12 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className="app">
-        {this.state.showSearchPage ? (
+        <Route exact path='/search' render={() => (
           < SearchPage />
-        ) : (
+        )}/>
+        <Route exact path='/' render={() => (
           < Bookshelf />
-        )}
+        )}/>
       </div>
     )
   }
