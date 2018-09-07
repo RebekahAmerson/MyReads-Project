@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
 import Book from './Book';
+import * as BooksAPI from './BooksAPI'
+
 
 class Bookshelf extends Component {
+  state = {
+    books: []
+  }
+
+  componentDidMount() {
+    BooksAPI.getAll().then((books) => this.setState({books}))
+  }
+
   render() {
-    const { books } = this.props;
+    const { books } = this.state;
     const shelves = [
       {name: 'currentlyReading',
        text: 'Currently Reading'},
@@ -32,7 +42,11 @@ class Bookshelf extends Component {
 ))}
         </div>
       </div>
-    </div>)
+      <div className="open-search">
+        <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
+      </div>
+    </div>
+  )
 
   }
 }
