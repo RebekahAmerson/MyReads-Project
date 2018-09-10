@@ -1,27 +1,12 @@
 import React, { Component } from 'react';
 import Book from './Book';
-import * as BooksAPI from './BooksAPI';
 import { Link } from 'react-router-dom';
 
 
 
 class Bookshelf extends Component {
-  state = {
-    books: []
-  }
-
-  updateBooks = (shelf, book) => {
-    console.log(`moved to ${shelf}`);
-    BooksAPI.update(book, shelf).then(() => BooksAPI.getAll().then((books) => this.setState({books})))
-    console.log(this.state.books);
-  }
-
-  componentDidMount() {
-    BooksAPI.getAll().then((books) => this.setState({books}))
-  }
-
   render() {
-    const { books } = this.state;
+    const { books } = this.props;
     const shelves = [
       {name: 'currentlyReading',
        text: 'Currently Reading'},
@@ -43,7 +28,7 @@ class Bookshelf extends Component {
             <h2 className="bookshelf-title">{shelf.text}</h2>
             <div className="bookshelf-books">
               <ol className="books-grid">
-              <Book books={books.filter((book) => book.shelf === shelf.name)} onShelfChange={this.updateBooks}/>
+              <Book books={books.filter((book) => book.shelf === shelf.name)} onShelfChange={this.props.updateBooks}/>
               </ol>
             </div>
           </div>
