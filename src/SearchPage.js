@@ -7,7 +7,7 @@ import Book from './Book';
 class SearchPage extends Component {
   state = {
     searchedBooks: [],
-    query: '' //l,v,b,
+    // query: '' //l,v,b,
   }
 
   searchBooks = (query) => {
@@ -22,19 +22,15 @@ class SearchPage extends Component {
 
   checkBooks = (results) => {
     if (results.length > 0) {
-      console.log(results);
-      console.log('results found');
       results.map(result => this.setShelf(result));
       this.setState({searchedBooks: results});
   } else {
-      console.log('no results');
       this.setState({searchedBooks: []});
       }
   }
 
   setShelf(result) {
     const {books} = this.props;
-    console.log(result);
     for (let book of books) {
       if (result.id === book.id) {
         result.shelf = book.shelf;
@@ -44,9 +40,17 @@ class SearchPage extends Component {
       }
   }}
 
-// componentDidMount() {
-//   this.searchBooks('l');
-// }
+  renderBooks() {
+    if (this.state.searchedBooks.length === 0) {
+      return(
+        <div>No Results Found</div>
+      )
+    } else {
+      return (
+        <Book books={this.state.searchedBooks} />
+      )
+    }
+  }
 
   render() {
     return (
@@ -61,7 +65,9 @@ class SearchPage extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-          <Book books={this.state.searchedBooks} />
+          {
+            this.renderBooks()
+          }
           </ol>
         </div>
       </div>
