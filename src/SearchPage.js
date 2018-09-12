@@ -47,7 +47,7 @@ class SearchPage extends Component {
       )
     } else {
       return (
-        <Book books={this.state.searchedBooks} />
+        <Book books={this.state.searchedBooks} onShelfChange={this.props.updateBooks} />
       )
     }
   }
