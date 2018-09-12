@@ -11,7 +11,7 @@ class SearchPage extends Component {
   }
 
   searchBooks = (query) => {
-    console.log(query);
+    // console.log(query);
     if (query !== '') {
       BooksAPI.search(query)
       .then(results => this.checkBooks(results))
