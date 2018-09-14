@@ -7,11 +7,9 @@ import Book from './Book';
 class SearchPage extends Component {
   state = {
     searchedBooks: [],
-    // query: '' //l,v,b,
   }
 
   searchBooks = (query) => {
-    // console.log(query);
     if (query !== '') {
       BooksAPI.search(query)
       .then(results => this.checkBooks(results))
