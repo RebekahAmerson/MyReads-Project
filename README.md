@@ -13,4 +13,4 @@ This is a project for the Front-End Developer Nanodegree from Udacity. You can m
 * click on the plus icon to search for new books to add to shelf.
 
 # Credits:
-This project was made using [Create React App](https://github.com/facebookincubator/create-react-app), and [React Router](https://github.com/ReactTraining/react-router). The backend API and starter code were provided by [Udacity](https://udacity.com).
+This project was made using [Create React App](https://github.com/facebookincubator/create-react-app), [React Router](https://github.com/ReactTraining/react-router), and Debouncing from [David Walsh's Blog](https://davidwalsh.name/javascript-debounce-function). The backend API and starter code were provided by [Udacity](https://udacity.com).
