@@ -9,14 +9,30 @@ class SearchPage extends Component {
     searchedBooks: [],
   }
 
-  searchBooks = (query) => {
+  //Debounce code adapted from https://davidwalsh.name/javascript-debounce-function
+  debounce(func, wait, immediate) {
+  	let timeout;
+  	return function() {
+  		let context = this, args = arguments;
+  		let later = function() {
+  			timeout = null;
+  			if (!immediate) func.apply(context, args);
+  		};
+  		let callNow = immediate && !timeout;
+  		clearTimeout(timeout);
+  		timeout = setTimeout(later, wait);
+  		if (callNow) func.apply(context, args);
+  	};
+  };
+
+  searchBooks = this.debounce((query) => {
     if (query !== '') {
       BooksAPI.search(query)
-      .then(results => this.checkBooks(results))
+      .then(results => this.checkBooks(results));
     } else {
       this.setState({searchedBooks: []})
     }
-  }
+  },500)
 
   checkBooks = (results) => {
     if (results.length > 0) {
@@ -39,15 +55,15 @@ class SearchPage extends Component {
   }}
 
   renderBooks() {
-    if (this.state.searchedBooks.length === 0) {
-      return(
-        <div>No Results Found</div>
-      )
-    } else {
-      return (
-        <Book books={this.state.searchedBooks} onShelfChange={this.props.updateBooks} />
-      )
-    }
+      if (this.state.searchedBooks.length === 0) {
+        return(
+          <div>No Results Found</div>
+        )
+      } else {
+        return (
+          <Book books={this.state.searchedBooks} onShelfChange={this.props.updateBooks} />
+        )
+      }
   }
 
   render() {
@@ -56,7 +72,7 @@ class SearchPage extends Component {
         <div className="search-books-bar">
           <Link to='/' className="close-search">Close</Link>
           <div className="search-books-input-wrapper">
-            <input type="text"
+            <input id="search-input" type="text"
             placeholder="Search by title or author"
             onChange={(e) => this.searchBooks(e.target.value)}/>
           </div>
